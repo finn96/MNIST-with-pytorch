@@ -1,6 +1,8 @@
 # MNIST Handwritten Digit Classification with Pytorch
 
-
+## TODO: 
+ - Fix target size and output size difference
+ - Try CrossEntropy Loss (maybe add an argmax layer)
 ## Thought Dump
 
 I guess we need to start by finding the data. A quick google search finds it: http://yann.lecun.com/exdb/mnist/
