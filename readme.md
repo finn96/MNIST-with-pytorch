@@ -51,3 +51,5 @@ I'm not going to make this notebook about getting cuda to work in WSL2, but NVID
 - Run some basic sanity checks in powershell `nvidia-smi`, `nvcc` etc. Make sure that your GPU is correctly hooked up to the host. If it's not, you're going to have a bad time.
     - There's some sort of link between `C:\Windows\System32\lxss\` and the subsystem. But I haven't figured out exactly what it is yet. I think there's a link between here and the usr/lib driver in the subsystem.
 
+
+Alright, so I started getting an error about cuda runtime version not matching cuda driver version. I noticed on my windows host that the cuda version was 11-3, but the latest cuda available for Ubuntu is 11.2. I uninstalled nvidia `FrameView` and am currently installing cuda_11.2.1 on the host. Let's see if this works. If I don't come back, it means  I lost my display
