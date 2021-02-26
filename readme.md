@@ -39,3 +39,15 @@ Okay so the classic one from the pytorch tutorial has a whole bunch of layers. P
 
 wget `http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz`
 wget `http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz`
+
+## Update 02/26
+
+I'm not going to make this notebook about getting cuda to work in WSL2, but NVIDIA's posts make this sound way easier than it is. Currently on 3rd install of cuda-toolkit in the subsystem. Probably won't work, but here's what I've learned so far
+
+- Do not install ANY `nvidia-*` packages. There's going to be some display drivers in there and they're going to mess up the gpu virtualization. The only thing you should be installing is `cuda-toolkit-{major}-{minor}
+
+- Seriously, just running `sudo apt remove nvidia-*` helped me make some serious progress.
+
+- Run some basic sanity checks in powershell `nvidia-smi`, `nvcc` etc. Make sure that your GPU is correctly hooked up to the host. If it's not, you're going to have a bad time.
+    - There's some sort of link between `C:\Windows\System32\lxss\` and the subsystem. But I haven't figured out exactly what it is yet. I think there's a link between here and the usr/lib driver in the subsystem.
+
