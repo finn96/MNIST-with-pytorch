@@ -2,4 +2,4 @@ data/
 models/
 .ipynb*
 *~
-tmp/
+tmp
