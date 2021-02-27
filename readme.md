@@ -53,3 +53,15 @@ I'm not going to make this notebook about getting cuda to work in WSL2, but NVID
 
 
 Alright, so I started getting an error about cuda runtime version not matching cuda driver version. I noticed on my windows host that the cuda version was 11-3, but the latest cuda available for Ubuntu is 11.2. I uninstalled nvidia `FrameView` and am currently installing cuda_11.2.1 on the host. Let's see if this works. If I don't come back, it means  I lost my display
+
+Got cuda on. It's slower.
+
+We got something fairly reproducible now. After a bunch of tries, it seems we have a network that can somewhat reliably converge to a solution with 70-80% accuracy. It's a 3 layer network with a maxpool and dropout layer. Conv1d(1,1,3) -> Sigmoid -> max_pool1d -> Linear(391,100) -> Dropout -> -> Linear(100,10). I actually can't remember if the max_pool1d is better or worse. I need to check that again. Here's where the real breakthroughs came on re-producibility:
+ - Switching the activation function from RELU to Sigmoid. I kept getting stuck in these local gradients. I THINK some gradients were just explodingly negative and I was getting dying RELU, based on how significant of a change this made. Don't get me wrong, occasionally this model would come out 80-85% accurate off only a few epochs. But 9/10 times it got stuck and thought everything was a 7.
+
+ - Manually settting the initial weights of the two linear layers to uniform([-1/sqrt(n), 1/sqrt(n)]). I need to look up how torch normally sets the initial weights.
+
+- The Dropout I'm not sure about. I need to test more. I know at one point it helped, but I've changed a lot since then and need to test
+
+I compared a number of configurations. It turns out that maxpool_1d appears to be worse, with a test accuracy of about 6-8% lower. For the Linear Networks, I toyed with the shapes (792, 100),(100,10) and (792,80),(80,10). Both seemed to perform about equal. I chose 100 because it's square.
+
