@@ -68,3 +68,5 @@ I compared a number of configurations. It turns out that maxpool_1d appears to b
 LOL: Linear(784, 100) -> Sigmoid -> Linear(100, 10) kicks ass. 92%. But no Conv :(
 
 Okay takeway from the Linear experiment -- we don't need the drop. Getting 88% now on the conv(1,1,3) -> Sigmoid -> Linear(782, 100) -> Sigmoid -> Linear(100,10)
+
+uhh wrong name
