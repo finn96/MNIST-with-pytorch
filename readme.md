@@ -65,3 +65,6 @@ We got something fairly reproducible now. After a bunch of tries, it seems we ha
 
 I compared a number of configurations. It turns out that maxpool_1d appears to be worse, with a test accuracy of about 6-8% lower. For the Linear Networks, I toyed with the shapes (792, 100),(100,10) and (792,80),(80,10). Both seemed to perform about equal. I chose 100 because it's square.
 
+LOL: Linear(784, 100) -> Sigmoid -> Linear(100, 10) kicks ass. 92%. But no Conv :(
+
+Okay takeway from the Linear experiment -- we don't need the drop. Getting 88% now on the conv(1,1,3) -> Sigmoid -> Linear(782, 100) -> Sigmoid -> Linear(100,10)
